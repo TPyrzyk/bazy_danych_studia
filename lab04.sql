@@ -72,3 +72,36 @@ alter table zadanie drop foreign key fk_zadanie_projekt;
 alter table zadanie add constraint fr_zadanie_projekt foreign key(projekt) references projekt(id_projektu) on delete set null;
 delete from projekt where id_projektu = 1;
 select * from zadanie;
+
+#===========================================
+# ZADANIE 1
+CREATE TABLE CLIENT as SELECT * from company_2025.CLIENT;
+CREATE TABLE `ORDER` as SELECT * from company_2025.`ORDER`;
+CREATE TABLE EMPLOYEE as SELECT * from company_2025.EMPLOYEE;
+
+select * from `ORDER`;
+select * from `ORDER` where ORDER_STATUS = 5;
+select ORDER_ID, ORDER_STATUS from `ORDER` where  CLIENT_ID = 1 or CLIENT_ID = 3 or CLIENT_ID = 5;
+
+# ZADANIE 2
+select * from EMPLOYEE;
+select * from CLIENT;
+
+select * from EMPLOYEE where FIRST_NAME = "Agnieszka" and pensja = 3900;
+select * from EMPLOYEE where pensja > 5000 and pensja < 7000;
+select * from CLIENT where SHORT_NAME like '%eco%' and is_company = 1;
+
+# ZADANIE 3
+select * from `ORDER` where MONTH(order_date) in (6,7);
+select * from CLIENT where TAX_IDENTIFIER is not null order by short_name asc;
+select * from EMPLOYEE order by birth_date asc limit 5;
+
+# ZADANIE 4
+select FIRST_NAME from EMPLOYEE disc;
+select CONCAT(FIRST_NAME, ' ', LAST_NAME) as polaczona_kolumna from EMPLOYEE where LAST_NAME like 'Ko%';
+select LAST_NAME, pensja from EMPLOYEE where YEAR(DATE_OF_EMPLOYMENT) in (2010,2014);
+
+# ZADANIE 5
+select pensja, pensja * 0.75 as pensja_netto, pensja*0.25 as podatek from EMPLOYEE; 
+select * from CLIENT where TAX_IDENTIFIER IS NULL;
+select short_name from CLIENT where short_name like 'K%' or short_name like '%ski' order by short_name desc;
